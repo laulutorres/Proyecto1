@@ -4,36 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="./fun.js"></script>
     <title>Document</title>
     
 </head>
 
 <body>
-    <header>
-        
+    
 
-    </header>
+
+
+
+
+
+
 <div id="uno">
     <h1>Inicio</h1>
 </div>
 
 <div id="dos">
-    <img id="image" style="height: 300px"  src="java.png" >
+    <img class="img" id="image" style="height: 300px"  src="java.png" >
 </div>
 
 <div id="tres">
-    <p>
+    <p class="text">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus vel commodi culpa hic earum facilis dolor tempore quo, aspernatur in laudantium dicta rem dolorem officiis ullam vitae cupiditate illo sint!
     </p>
 </div>
 
 <div id="cuatro">
-    <button type="button" onclick="HideCallback()">click aquí</button>
+
+    <button type="button">click aquí</button>
+
+
 </div>
 
 
+
+
+<script>
+    function animateCSS(elemen, animationName, callback)
+{
+    const node = document.querySelector(elemen);
+    node.classList.add('animated', animationName);
+    function handleAnimationEnd()
+    {
+        node.classList.remove('animated', animationName);
+        node.removeEventListener("animationend", handleAnimationEnd);
+
+        if (typeof callback === "function") callback()
+    }
+
+
+    node.addEventListener("animationend", handleAnimationEnd);
+}
+function startinfiniteAnimation(element, animationName)
+{
+    const node = document.querySelector(element);
+    node.classList.add("animated", "infinite",animationName)
+}
+function stopInfiniteAnimation(element,animationName)
+{
+    const node = document.querySelector(element);
+    node.classList.remove("animated", "infinite", animationName);
+}
+
+$(document).ready(function ()
+{
+    $("#dos").mouseenter(function()
+    {
+        animateCSS(".img", "bounce");
+        startinfiniteAnimation(".text", "shake");
+    });
+
+    $("#dos").mouseleave(function()
+    {
+        animateCSS(".img", "bounce");
+        stopInfiniteAnimation(".text", "shake");
+    });
+});
+
+</script>
 
 </body>
 </html>
